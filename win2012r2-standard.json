@@ -1,0 +1,29 @@
+{
+  "variables":
+  {
+    "iso_url": "",
+    "iso_checksum": "",
+    "product_key": ""
+  },
+  "builders":
+  [
+    {
+      "type": "hyperv-iso",
+      "product_key" : "{{user `product_key`}}",
+      "iso_url":"{{user `iso_url`}}",
+      "iso_checksum":"{{user `iso_checksum`}}",
+      "switch_name": "ExternalNAT",
+      "disk_size": 40960,
+      "ram_size_mb": 1024,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "shutdown_command":    "shutdown /s /t 1 /f /d p:4:1 /c 'Packer Shutdown'",
+      "floppy_files": [
+        "./answer_files/2012_r2/Autounattend.xml",
+        "./scripts/microsoft-updates.bat",
+        "./scripts/win-updates.ps1",
+        "./scripts/openssh.ps1"
+      ]
+    }
+  ]
+}
